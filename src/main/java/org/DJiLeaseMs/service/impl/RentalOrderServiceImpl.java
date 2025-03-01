@@ -1,10 +1,12 @@
 package org.DJiLeaseMs.service.impl;
 
+import org.DJiLeaseMs.common.result.Result;
 import org.DJiLeaseMs.entity.RentalOrder;
 import org.DJiLeaseMs.mapper.RentalOrderMapper;
 import org.DJiLeaseMs.service.RentalOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -15,7 +17,7 @@ public class RentalOrderServiceImpl implements RentalOrderService {
     @Autowired
     private RentalOrderMapper rentalOrderMapper;
 
-    @Override
+    // 添加租赁订单
     public void addRentalOrder(RentalOrder rentalOrder) {
         // 设置 createdAt 和 updatedAt 为当前时间
         LocalDateTime now = LocalDateTime.now();
@@ -24,25 +26,30 @@ public class RentalOrderServiceImpl implements RentalOrderService {
         rentalOrderMapper.addRentalOrder(rentalOrder);
     }
 
-    @Override
+    // 删除租赁订单
     public void deleteRentalOrder(Integer id) {
         rentalOrderMapper.deleteRentalOrder(id);
     }
 
-    @Override
+    // 更新租赁订单
     public void updateRentalOrder(RentalOrder rentalOrder) {
         // 更新 updated_at 为当前时间
         rentalOrder.setUpdatedAt(LocalDateTime.now());
         rentalOrderMapper.updateRentalOrder(rentalOrder);
     }
 
-    @Override
+    // 根据ID查询租赁订单
     public RentalOrder getRentalOrderById(Integer id) {
         return rentalOrderMapper.getRentalOrderById(id);
     }
 
-    @Override
+    // 查询所有租赁订单
     public List<RentalOrder> getAllRentalOrders() {
         return rentalOrderMapper.getAllRentalOrders();
+    }
+
+    @Override
+    public List<RentalOrder> getRentalOrderByStatus(String status) {
+        return rentalOrderMapper.getRentalOrderByStatus(status);
     }
 }

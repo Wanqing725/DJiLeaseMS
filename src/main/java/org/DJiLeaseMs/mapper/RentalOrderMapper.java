@@ -43,4 +43,7 @@ public interface RentalOrderMapper {
     // 查询所有租赁订单
     @Select("SELECT * FROM rental_order")
     List<RentalOrder> getAllRentalOrders();
+
+    @Select("SELECT * FROM rental_order WHERE order_status = #{status}")
+    List<RentalOrder> getRentalOrderByStatus(String status);
 }

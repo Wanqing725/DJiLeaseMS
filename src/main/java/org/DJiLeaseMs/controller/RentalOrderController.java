@@ -47,10 +47,21 @@ public class RentalOrderController {
         return Result.success(MessageConstant.OPERATE_SUCCESS, rentalOrder);
     }
 
+    /**
+     * 根据点单状态查询
+     * @param status 订单状态
+     * @return 查询结果
+     */
+    @GetMapping("/getByStatus/{status}")
+    public Result<List<RentalOrder>> getRentalOrderByStatus(@PathVariable String status) {
+        List<RentalOrder> list = rentalOrderService.getRentalOrderByStatus(status);
+        return Result.success(MessageConstant.OPERATE_SUCCESS, list);
+    }
+
     // 查询所有租赁订单
     @GetMapping("/getAll")
-    public Result<List<RentalOrder>> getAllRentalOrders() {
+    public Result<List<RentalOrder>> getAll(){
         List<RentalOrder> list = rentalOrderService.getAllRentalOrders();
-        return Result.success(MessageConstant.OPERATE_SUCCESS, list);
+        return Result.success(MessageConstant.OPERATE_SUCCESS,list);
     }
 }

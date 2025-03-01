@@ -64,4 +64,16 @@ public class RentalOrderController {
         List<RentalOrder> list = rentalOrderService.getAllRentalOrders();
         return Result.success(MessageConstant.OPERATE_SUCCESS,list);
     }
+
+    /**
+     * 修改订单状态
+     * @param id 订单ID
+     * @param status 新的状态值
+     * @return 操作结果
+     */
+    @PutMapping("/updateStatus/{id}")
+    public Result<String> updateOrderStatus(@PathVariable Integer id, @RequestParam String status) {
+        rentalOrderService.updateOrderStatus(id, status);
+        return Result.success(MessageConstant.OPERATE_SUCCESS);
+    }
 }

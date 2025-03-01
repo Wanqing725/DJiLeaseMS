@@ -11,5 +11,6 @@ public interface MessageConstant {
     String OPERATE_FAIL = "操作失败";
     String TOKEN_INVALID = "token无效";
     String TOKEN_NOT_EXIST = "token不存在";
+    String ORDER_IS_NOT_EXIST = "订单不存在";
 
 }

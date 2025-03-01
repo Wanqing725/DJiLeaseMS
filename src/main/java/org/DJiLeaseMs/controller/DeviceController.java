@@ -43,6 +43,8 @@ public class DeviceController {
         return Result.success(MessageConstant.OPERATE_SUCCESS, device);
     }
 
+
+
     // 查询所有设备
     @GetMapping("/getAll")
     public Result<List<Device>> getAllDevices() {

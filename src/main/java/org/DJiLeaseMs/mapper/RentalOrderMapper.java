@@ -44,6 +44,11 @@ public interface RentalOrderMapper {
     @Select("SELECT * FROM rental_order")
     List<RentalOrder> getAllRentalOrders();
 
+    // 根据状态获取订单
     @Select("SELECT * FROM rental_order WHERE order_status = #{status}")
     List<RentalOrder> getRentalOrderByStatus(String status);
+
+    // 修改状态
+    @Update("UPDATE rental_order SET order_status = #{status} WHERE id = #{id}")
+    void updateStatusById(Integer id, String status);
 }

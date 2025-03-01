@@ -1,7 +1,9 @@
 package org.DJiLeaseMs.service.impl;
 
+import org.DJiLeaseMs.common.constant.MessageConstant;
 import org.DJiLeaseMs.common.result.Result;
 import org.DJiLeaseMs.entity.RentalOrder;
+import org.DJiLeaseMs.excption.BaseException;
 import org.DJiLeaseMs.mapper.RentalOrderMapper;
 import org.DJiLeaseMs.service.RentalOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +53,15 @@ public class RentalOrderServiceImpl implements RentalOrderService {
     @Override
     public List<RentalOrder> getRentalOrderByStatus(String status) {
         return rentalOrderMapper.getRentalOrderByStatus(status);
+    }
+
+    @Override
+    public void updateOrderStatus(Integer id, String status) {
+        // 检查订单是否存在
+        RentalOrder rentalOrder = rentalOrderMapper.getRentalOrderById(id);
+        if(rentalOrder == null){
+            throw new BaseException(MessageConstant.ORDER_IS_NOT_EXIST);
+        }
+        rentalOrderMapper.updateStatusById(id, status);
     }
 }

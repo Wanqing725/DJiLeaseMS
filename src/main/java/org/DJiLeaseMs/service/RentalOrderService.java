@@ -26,4 +26,11 @@ public interface RentalOrderService {
      * @return 符合条件的订单列表
      */
     List<RentalOrder> getRentalOrderByStatus(String status);
+
+    /**
+     * 修改状态
+     * @param id
+     * @param status
+     */
+    void updateOrderStatus(Integer id, String status);
 }

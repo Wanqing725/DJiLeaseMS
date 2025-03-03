@@ -20,13 +20,6 @@ public interface CustomerMapper {
     void deleteCustomer(Integer id);
 
     // 更新客户
-    @Update("UPDATE customer SET " +
-            "name = #{name}, " +
-            "address = #{address}, " +
-            "phone = #{phone}, " +
-            "xianyu_id = #{xianyuId}, " +
-            "updated_at = #{updatedAt} " +
-            "WHERE id = #{id}")
     void updateCustomer(Customer customer);
 
     // 根据ID查询客户

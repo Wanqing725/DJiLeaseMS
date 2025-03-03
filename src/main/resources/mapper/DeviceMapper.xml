@@ -1,0 +1,37 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.DJiLeaseMs.mapper.DeviceMapper">
+    <update id="updateDevice">
+        UPDATE device
+        <set>
+            <if test="serialNumber != null and serialNumber != ''">
+                serial_number = #{serialNumber},
+            </if>
+            <if test="model != null and model != ''">
+                model = #{model},
+            </if>
+            <if test="color != null and color != ''">
+                color = #{color},
+            </if>
+            <if test="purchasePrice != null">
+                purchase_price = #{purchasePrice},
+            </if>
+            <if test="dailyRent != null">
+                daily_rent = #{dailyRent},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="lastCheckTime != null">
+                last_check_time = #{lastCheckTime},
+            </if>
+            <if test="checkNotes != null and checkNotes != ''">
+                check_notes = #{checkNotes},
+            </if>
+            <if test="insuranceDate != null">
+                insurance_date = #{insuranceDate},
+            </if>
+            updated_at = now()
+        </set>
+        WHERE id = #{id}
+    </update>
+</mapper>

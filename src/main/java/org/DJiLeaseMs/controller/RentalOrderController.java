@@ -20,7 +20,7 @@ public class RentalOrderController {
     private RentalOrderService rentalOrderService;
 
     // 添加租赁订单
-    @PostMapping("/add")
+    @PostMapping("/api/add")
     public Result<String> addRentalOrder(@RequestBody RentalOrder rentalOrder) {
         rentalOrderService.addRentalOrder(rentalOrder);
         return Result.success(MessageConstant.OPERATE_SUCCESS);

@@ -20,18 +20,6 @@ public interface DeviceMapper {
     void deleteDevice(Integer id);
 
     // 更新设备
-    @Update("UPDATE device SET " +
-            "serial_number = #{serialNumber}, " +
-            "model = #{model}, " +
-            "color = #{color}, " +
-            "purchase_price = #{purchasePrice}, " +
-            "daily_rent = #{dailyRent}, " +
-            "status = #{status}, " +
-            "last_check_time = #{lastCheckTime}, " +
-            "check_notes = #{checkNotes}, " +
-            "insurance_date = #{insuranceDate}, " +
-            "updated_at = #{updatedAt} " +
-            "WHERE id = #{id}")
     void updateDevice(Device device);
 
     // 根据ID查询设备

@@ -1,0 +1,22 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.DJiLeaseMs.mapper.CustomerMapper">
+    <update id="updateCustomer">
+        UPDATE customer
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="xianyuId != null and xianyuId != ''">
+                xianyu_id = #{xianyuId},
+            </if>
+            updated_at = now()
+        </set>
+        WHERE id = #{id}
+    </update>
+</mapper>

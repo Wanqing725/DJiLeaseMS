@@ -1,6 +1,7 @@
 package org.DJiLeaseMs.service.impl;
 
 import org.DJiLeaseMs.entity.Device;
+import org.DJiLeaseMs.excption.BaseException;
 import org.DJiLeaseMs.mapper.DeviceMapper;
 import org.DJiLeaseMs.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,16 @@ public class DeviceServiceImpl implements DeviceService {
 
     @Override
     public void updateDevice(Device device) {
+        if(device.getId() == null){
+            throw new BaseException("id不能为空");
+        }
+
+        // 检查设备是否存在
+        Device existingDevice = deviceMapper.getDeviceById(device.getId());
+        if (existingDevice == null) {
+            throw new BaseException("设备不存在，无法更新");
+        }
+
         // 更新 updated_at 为当前时间
         device.setUpdatedAt(LocalDateTime.now());
         deviceMapper.updateDevice(device);

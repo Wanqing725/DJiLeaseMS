@@ -3,6 +3,7 @@ package org.DJiLeaseMs.controller;
 import org.DJiLeaseMs.common.constant.MessageConstant;
 import org.DJiLeaseMs.common.result.Result;
 import org.DJiLeaseMs.entity.Device;
+import org.DJiLeaseMs.excption.BaseException;
 import org.DJiLeaseMs.service.DeviceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/devices")
+@RequestMapping("/api/devices")
 public class DeviceController {
     @Autowired
     private DeviceService deviceService;
@@ -50,5 +51,12 @@ public class DeviceController {
     public Result<List<Device>> getAllDevices() {
         List<Device> list = deviceService.getAllDevices();
         return Result.success(MessageConstant.OPERATE_SUCCESS, list);
+    }
+
+
+    // 异常处理
+    @ExceptionHandler(BaseException.class)
+    public Result<String> handleBaseException(BaseException e) {
+        return Result.error(e.getMessage());
     }
 }

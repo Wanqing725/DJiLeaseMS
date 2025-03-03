@@ -18,7 +18,10 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         log.info("开始注册登录拦截器...");
         registry.addInterceptor(loginInterceptor)
-                .addPathPatterns("/api/**")
+                .addPathPatterns("/customers/**")
+                .addPathPatterns("/devices/**")
+                .addPathPatterns("/orderItems/**")
+                .addPathPatterns("/rentalOrders/**")
                 .excludePathPatterns(
                     "/user/login",
                     "/user/register",

@@ -10,4 +10,9 @@ public interface UserService {
      */
     User getUserByUsername(String username);
 
+    /**
+     * 添加新用户
+     * @param user 用户对象
+     */
+    void addUser(User user);
 }

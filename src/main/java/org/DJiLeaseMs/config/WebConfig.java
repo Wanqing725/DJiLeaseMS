@@ -16,11 +16,15 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        log.info("开始注册自定义拦截器....");
+        log.info("开始注册登录拦截器...");
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/api/**")
-                .excludePathPatterns("/user/**")
-                // 添加以下排除规则
-                .excludePathPatterns("/**", HttpMethod.OPTIONS.toString()); // 放行所有 OPTIONS 请求
+                .excludePathPatterns(
+                    "/user/login",
+                    "/user/register",
+                    "/swagger-ui/**",
+                    "/v3/api-docs/**"
+                )
+                .excludePathPatterns(HttpMethod.OPTIONS.toString()); // 放行 OPTIONS 请求
     }
 }

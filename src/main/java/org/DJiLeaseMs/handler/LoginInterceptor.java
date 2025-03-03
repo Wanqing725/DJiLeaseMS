@@ -11,25 +11,33 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception{
+    private static final org.slf4j.Logger log = org.slf4j.LoggerFactory.getLogger(LoginInterceptor.class);
+
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        log.debug("处理请求拦截，验证Token");
 
         // 获取请求头中的 Token
         String token = request.getHeader("Authorization");
-        System.out.println("到这里了");
+        
         // 检查 Token 是否存在
         if (token == null || token.isEmpty()) {
-
+            log.warn("Token不存在");
             writeErrorResponse(response, Result.error(MessageConstant.TOKEN_NOT_EXIST));
             return false;
         }
 
         // 验证 Token 是否有效
         if (!JwtUtil.validateToken(token)) {
+            log.warn("Token无效");
             writeErrorResponse(response, Result.error(MessageConstant.TOKEN_INVALID));
             return false;
         }
 
-        // 如果验证通过，放行
+        // 获取用户信息并存储到请求属性中
+        String username = JwtUtil.getUsernameFromToken(token);
+        request.setAttribute("currentUser", username);
+        log.debug("Token验证通过，用户：{}", username);
+
         return true;
     }
 
